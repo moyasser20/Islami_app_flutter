@@ -112,68 +112,60 @@ class _IntroScreenState extends State<IntroScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        if (_countPage != 0)
-                          ElevatedButton(
-                            onPressed: () {
-                              if (pageController.hasClients) {
-                                pageController.previousPage(
-                                  duration: const Duration(milliseconds: 300),
-                                  curve: Curves.easeInOut,
-                                );
-                              }
-                            },
-                            child: Text(
-                              "Back",
-                              style: TextStyle(
-                                color: AppColor.primaryColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColor.secondoryColor,
-                            ),
+                        if(_countPage != 0)
+                          ElevatedButton(onPressed: () {
+                            pageController.previousPage(duration: Duration(
+                              milliseconds: 300
+                            ), curve: Curves.easeInOut);
+
+                          }, child:Text("Back" , style: TextStyle(
+                            color: AppColor.primaryColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold
+                          ),),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColor.secondoryColor,
+                            foregroundColor: AppColor.primaryColor
                           ),
-                        SmoothPageIndicator(
-                          controller: pageController,
-                          count: imagePaths.length,
-                          effect: WormEffect(
-                              dotColor: AppColor.dotColor,
-                              activeDotColor: AppColor.primaryColor,
-                              dotHeight: 7,
-                              dotWidth: 7
-                          ),
-                        ),
+                          )
+                        else
+                          const SizedBox(width: 60,),
+                        SmoothPageIndicator(controller: pageController, count: imagePaths.length,
+                          effect:ExpandingDotsEffect(
+                            dotColor: AppColor.white,
+                            activeDotColor: AppColor.primaryColor,
+                            dotWidth: 7,
+                            dotHeight: 7,
+                            expansionFactor: 2.0
+                          ) ,),
                         ElevatedButton(
                           onPressed: () {
-                            if (pageController.hasClients) {
-                              if (_countPage < imagePaths.length - 1) {
-                                pageController.nextPage(
-                                  duration: const Duration(milliseconds: 300),
-                                  curve: Curves.easeInOut,
-                                );
-                              } else {
-
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => layoutpage()),
-                                );
-                              }
+                            if (_countPage < imagePaths.length - 1) {
+                              // Navigate to the next page
+                              pageController.nextPage(
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.easeInOut,
+                              );
+                            } else {
+                              // Navigate to the layout page
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => layoutpage()),
+                              );
                             }
                           },
                           child: Text(
                             _countPage < imagePaths.length - 1 ? "Next" : "Finish",
-                            style: TextStyle(
-                              color: AppColor.primaryColor,
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                              fontSize: 18,
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColor.secondoryColor,
+                            foregroundColor: AppColor.primaryColor,
                           ),
-                        ),
-
+                        )
 
                       ],
                     )

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:islamiapp/core/constants/app_assets.dart';
 import 'package:islamiapp/core/theme/app_colors.dart';
-import 'package:islamiapp/features/layout/pages/hadoth_tab.dart';
-import 'package:islamiapp/features/layout/pages/quran_tab.dart';
-import 'package:islamiapp/features/layout/pages/radio_tab.dart';
-import 'package:islamiapp/features/layout/pages/sebha_tab.dart';
-import 'package:islamiapp/features/layout/pages/times_tab.dart';
+import 'package:islamiapp/features/layout/pages/hadith/hadoth_tab.dart';
+import 'package:islamiapp/features/layout/pages/quran/quran_tab.dart';
+import 'package:islamiapp/features/layout/pages/radio/radio_tab.dart';
+import 'package:islamiapp/features/layout/pages/sebha/sebha_tab.dart';
+import 'package:islamiapp/features/layout/pages/times/times_tab.dart';
 
 import '../widgets/cistome_navbar_items.dart';
 
@@ -23,8 +23,8 @@ class _layoutpageState extends State<layoutpage> {
     quranTab(),
     hadithtab(),
     sebhatab(),
-    radio(),
-    times(),
+    radiotab(),
+    timestab(),
   ];
 
   @override

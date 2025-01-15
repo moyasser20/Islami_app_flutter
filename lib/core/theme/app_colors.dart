@@ -6,4 +6,5 @@ class AppColor
   static Color secondoryColor = Color(0xFF202020);
   static Color white = Color(0xFFFFFFFF);
   static Color dotColor = Color(0xFF707070);
+  static Color searchColor = Color(0xFFFEFFE8);
 }

@@ -18,4 +18,11 @@ class AppAssets{
   static String thirdticon = "assets/icons/ThirdIcon.png";
   static String fourthicon = "assets/icons/fourthiCON.png";
   static String fifthicon = "assets/icons/fifthIcon.png";
+  static String hadith_tap = "assets/images/hadith_Tap.png";
+  static String sebha_tap = "assets/images/sebha_tab.png";
+  static String radio_tap = "assets/images/radio_tab.png";
+  static String times_tab = "assets/images/times_tab.png";
+  static String islami_logo = "assets/images/IsalmiLogo.png";
+  static String surahphotolistview = "assets/images/suraphotoListview.png";
+  static String suralogonumber= "assets/images/surahnumberLogo.png";
 }
