@@ -3,15 +3,21 @@
 import 'package:flutter/material.dart';
 import 'package:islamiapp/core/constants/app_assets.dart';
 import 'package:islamiapp/core/theme/app_colors.dart';
+import 'package:islamiapp/features/layout/pages/quran/widgets/SurahData.dart';
 
 class quranDetailView extends StatelessWidget {
 
   static const String routeName = "QuranDetailsView";
 
-  const quranDetailView({super.key});
+  final SurahData surahData;
+
+  const quranDetailView({super.key, required this.surahData});
 
   @override
   Widget build(BuildContext context) {
+
+    var args = ModalRoute.of(context)?.settings.arguments as SurahData;
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(image: AssetImage(AppAssets.quranDetailsView), fit: BoxFit.fill)
@@ -19,7 +25,7 @@ class quranDetailView extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text("Al-Fatiha", style: TextStyle(
+          title: Text(args.nameEN, style: TextStyle(
             fontSize: 20,
             fontFamily: "Janna",
             color: AppColor.primaryColor
@@ -33,14 +39,31 @@ class quranDetailView extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Text("الفاتحه", style: TextStyle(
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Text(args.nameAR,
+                textAlign: TextAlign.center,
+                style: TextStyle(
                 fontSize: 26,
                   fontFamily: "Janna",
                   color: AppColor.primaryColor
               ),),
             ),
+            Text('''ابِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+            الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+            الرَّحْمَنِ الرَّحِيمِ
+            مَالِكِ يَوْمِ الدِّينِ
+            إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
+            اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
+            صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّين
+
+              ''',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: "Janna",
+                  color: AppColor.primaryColor
+              ),),
           ],
         ),
       ),

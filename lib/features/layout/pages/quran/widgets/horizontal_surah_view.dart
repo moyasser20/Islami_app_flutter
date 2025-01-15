@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:islamiapp/Models/recent_data.dart';
 import 'package:islamiapp/core/constants/app_assets.dart';
 import 'package:islamiapp/core/theme/app_colors.dart';
+import 'package:islamiapp/features/layout/pages/quran/widgets/SurahData.dart';
 
 class surahview extends StatelessWidget {
 
-  final recentData recenData;
+  final SurahData surahData;
 
-  const surahview({super.key, required this.recenData});
+  const surahview({super.key, required this.surahData});
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +25,17 @@ class surahview extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(recenData.SurahNameEN, style: TextStyle(
+              Text(surahData.nameEN, style: TextStyle(
                 color: AppColor.secondoryColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 26
               ),),
-              Text(recenData.SurahNameAR, style: TextStyle(
+              Text(surahData.nameAR, style: TextStyle(
                 color: AppColor.secondoryColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 26
               ),),
-              Text(recenData.verses, style: TextStyle(
+              Text(surahData.verses, style: TextStyle(
                 color: AppColor.secondoryColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 14
