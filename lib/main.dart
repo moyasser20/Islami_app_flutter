@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islamiapp/features/layout/pages/intro_screen.dart';
 import 'package:islamiapp/features/layout/pages/layout_Page.dart';
+import 'package:islamiapp/features/layout/pages/quran/quran_details_view.dart';
 import 'package:islamiapp/features/splash/pages/splash_page.dart';
 
 void main() {
@@ -17,18 +18,16 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: splashPage.routename,
       routes: {
-        splashPage.routename:(_)
-        {
-          return splashPage();
-        },
-        layoutpage.routeName:(_)
-        {
-          return layoutpage();
-        },
-        IntroScreen.routeName:(_)
-        {
-          return IntroScreen();
-        },
+        splashPage.routename:(_) => splashPage(),
+
+        layoutpage.routeName:(_) => layoutpage(),
+
+        IntroScreen.routeName:(_) =>IntroScreen(),
+
+        quranDetailView.routeName:(_) => quranDetailView(),
+
+
+
 
       },
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islamiapp/Models/recent_data.dart';
 import 'package:islamiapp/core/constants/app_assets.dart';
 import 'package:islamiapp/core/theme/app_colors.dart';
+import 'package:islamiapp/features/layout/pages/quran/quran_details_view.dart';
 import 'package:islamiapp/features/layout/pages/quran/widgets/horizontal_surah_view.dart';
 import 'package:islamiapp/features/layout/pages/quran/widgets/vertical_surah_view.dart';
 import 'package:islamiapp/features/layout/widgets/upperLogo.dart';
@@ -151,21 +152,29 @@ class quranTab extends StatelessWidget {
                       fontSize: 18, fontWeight: FontWeight.bold, color: AppColor.searchColor),
                 ),
               ),
-              ListView.separated(
-                separatorBuilder: (context, index) => Divider(
-                  endIndent: 60,
-                  indent: 50,
-                  color: AppColor.primaryColor,
-                  thickness: 1.4,
-                ),
-                itemCount: englishNames.length,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return verticalSurahView(NameEN: englishNames[index], NameAr: arabicNames[index], verses: versesCount[index], Surahnumber: (index+1).toString(),);
-                },
+          ListView.separated(
+            separatorBuilder: (context, index) => Divider(
+              endIndent: 60,
+              indent: 50,
+              color: AppColor.primaryColor,
+              thickness: 1.4,
+            ),
+            itemCount: englishNames.length,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) => GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, quranDetailView.routeName);
+              },
+              child: verticalSurahView(
+                NameEN: englishNames[index],
+                NameAr: arabicNames[index],
+                verses: versesCount[index],
+                Surahnumber: (index + 1).toString(),
               ),
-            ],
+            ),
+          )
+          ],
           ),
         ),
       ),

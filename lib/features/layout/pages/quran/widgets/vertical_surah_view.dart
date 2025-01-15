@@ -36,12 +36,14 @@ class verticalSurahView extends StatelessWidget {
             children: [
               Text(
                 NameEN, style: TextStyle(
-                fontSize: 20,
+                  fontFamily: "Janna",
+                fontSize: 25,
                 fontWeight: FontWeight.bold,
                 color:  AppColor.white
               ),),
               SizedBox(height: 8,),
               Text(verses,style: TextStyle(
+                  fontFamily: "Janna",
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                   color:  AppColor.white
@@ -49,8 +51,8 @@ class verticalSurahView extends StatelessWidget {
             ],
           ),
           Spacer(),
-          Text(NameEN, style: TextStyle(
-              fontSize: 20,
+          Text(NameAr, style: TextStyle(
+              fontSize: 25,
               fontWeight: FontWeight.bold,
               color:  AppColor.white
           ),)
