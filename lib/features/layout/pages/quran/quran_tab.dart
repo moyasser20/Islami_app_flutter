@@ -8,8 +8,16 @@ import 'package:islamiapp/features/layout/pages/quran/widgets/SurahData.dart';
 import 'package:islamiapp/features/layout/pages/quran/widgets/vertical_surah_view.dart';
 import 'package:islamiapp/features/layout/widgets/upperLogo.dart';
 
-class quranTab extends StatelessWidget {
+class quranTab extends StatefulWidget {
   quranTab({super.key});
+
+  @override
+  State<quranTab> createState() => _quranTabState();
+}
+
+class _quranTabState extends State<quranTab> {
+  String searchQuery  = "";
+
   List<SurahData> suraList = [
     SurahData(id: 1, nameEN: "Al-Fatihah", nameAR: "الفاتحة", verses: "7"),
     SurahData(id: 2, nameEN: "Al-Baqarah", nameAR: "البقرة", verses: "286"),
@@ -126,6 +134,7 @@ class quranTab extends StatelessWidget {
     SurahData(id: 113, nameEN: "Al-Falaq", nameAR: "الفلق", verses: "5"),
     SurahData(id: 114, nameEN: "An-Nas", nameAR: "الناس", verses: "6"),
   ];
+  List<SurahData> searchSurahModels  = [];
 
   @override
   Widget build(BuildContext context) {
@@ -146,6 +155,13 @@ class quranTab extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: TextFormField(
+                  onChanged: (value) {
+                    searchQuery = value;
+                    search();
+                    setState(() {
+
+                    });
+                  },
                   decoration: InputDecoration(
                     hintText: "Sura Name",
                     filled: true,
@@ -183,64 +199,83 @@ class quranTab extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                child: Text(
-                  "Most Recently",
-                  style: TextStyle(
-                      color: AppColor.searchColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
+              Visibility(
+                visible: searchQuery.isEmpty,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      child: Text(
+                        "Most Recently",
+                        style: TextStyle(
+                            color: AppColor.searchColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 155,
+                      child: ListView.builder(
+                        itemCount: suraList.length,
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => surahview(surahData: suraList[index],),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                      child: Text(
+                        "Surah List",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold, color: AppColor.searchColor),
+                      ),
+                    ),
+                    ListView.separated(
+                      separatorBuilder: (context, index) => Divider(
+                        endIndent: 60,
+                        indent: 50,
+                        color: AppColor.primaryColor,
+                        thickness: 1.4,
+                      ),
+                      itemCount: suraList.length,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () {
+                          // Navigator.push(context, MaterialPageRoute(builder: quranDetailView(surahData: suraList[index],)))
+                          Navigator.pushNamed(
+                            context,
+                            quranDetailView.routeName,
+                            arguments: suraList[index],
+                          );
+                        },
+                        child: verticalSurahView(
+                          NameEN: suraList[index].nameEN,
+                          NameAr: suraList[index].nameAR,
+                          verses: suraList[index].verses,
+                          Surahnumber: (index + 1).toString(),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              SizedBox(
-                height: 155,
-                child: ListView.builder(
-                  itemCount: suraList.length,
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => surahview(surahData: suraList[index],),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                child: Text(
-                  "Surah List",
-                  style: TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold, color: AppColor.searchColor),
-                ),
-              ),
-              ListView.separated(
-                separatorBuilder: (context, index) => Divider(
-                  endIndent: 60,
-                  indent: 50,
-                  color: AppColor.primaryColor,
-                  thickness: 1.4,
-                ),
-                itemCount: suraList.length,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) => GestureDetector(
-                  onTap: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: quranDetailView(surahData: suraList[index],)))
-                    Navigator.pushNamed(
-                      context,
-                      quranDetailView.routeName,
-                      arguments: suraList[index],
-                    );
-                  },
-                  child: verticalSurahView(
-                    NameEN: suraList[index].nameEN,
-                    NameAr: suraList[index].nameAR,
-                    verses: suraList[index].verses,
-                    Surahnumber: (index + 1).toString(),
-                  ),
-                ),
-              ),
+              )
             ],
           ),
         ),
       ),
     );
+  }
+
+    void search(){
+    for(var sura in suraList)
+      {
+        if(sura.nameEN.contains(searchQuery)|| sura.nameAR.contains(searchQuery))
+          {
+            searchSurahModels.add(sura);
+          }
+      }
+    print(searchSurahModels.length);
   }
 }

@@ -26,4 +26,6 @@ class AppAssets{
   static String surahphotolistview = "assets/images/suraphotoListview.png";
   static String suralogonumber= "assets/images/surahnumberLogo.png";
   static String quranDetailsView= "assets/images/Soura Details Screen (1).png";
+  static String hadithCard= "assets/images/Hadith Card.png";
+  static String hadithBackground= "assets/images/Background.png";
 }

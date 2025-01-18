@@ -11,7 +11,7 @@ class upperlogo extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.topCenter,
-            child: Image.asset(AppAssets.islami_logo,height:size.height * 0.25, width: size.width * 0.8,),),
+            child: Image.asset(AppAssets.islami_logo,height:size.height * 0.25, width: size.width * 0.68,),),
       ],
     );
   }
