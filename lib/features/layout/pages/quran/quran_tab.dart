@@ -220,7 +220,7 @@ class _quranTabState extends State<quranTab> {
                         itemCount: suraList.length,
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) => surahview(surahData: suraList[index],),
+                        itemBuilder: (context, index) => surahview(surahData: suraList[index]),
                       ),
                     ),
                     Padding(
@@ -243,7 +243,6 @@ class _quranTabState extends State<quranTab> {
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) => GestureDetector(
                         onTap: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: quranDetailView(surahData: suraList[index],)))
                           Navigator.pushNamed(
                             context,
                             quranDetailView.routeName,
@@ -260,7 +259,31 @@ class _quranTabState extends State<quranTab> {
                     ),
                   ],
                 ),
-              )
+              ),
+              Visibility(
+                visible: searchQuery.isNotEmpty,
+                child: ListView.builder(
+                  itemCount: searchSurahModels.length,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        quranDetailView.routeName,
+                        arguments: searchSurahModels[index],
+                      );
+                    },
+                    child: verticalSurahView(
+                      NameEN: searchSurahModels[index].nameEN,
+                      NameAr: searchSurahModels[index].nameAR,
+                      verses: searchSurahModels[index].verses,
+                      Surahnumber: searchSurahModels[index].id.toString(),
+                    ),
+                  ),
+                ),
+              ),
+
             ],
           ),
         ),
@@ -268,14 +291,14 @@ class _quranTabState extends State<quranTab> {
     );
   }
 
-    void search(){
-    for(var sura in suraList)
-      {
-        if(sura.nameEN.contains(searchQuery)|| sura.nameAR.contains(searchQuery))
-          {
-            searchSurahModels.add(sura);
-          }
+  void search() {
+    searchSurahModels.clear(); // Clear the previous search results
+    for (var sura in suraList) {
+      if (sura.nameEN.toLowerCase().contains(searchQuery.toLowerCase()) ||
+          sura.nameAR.contains(searchQuery)) {
+        searchSurahModels.add(sura);
       }
-    print(searchSurahModels.length);
+    }
   }
+
 }
